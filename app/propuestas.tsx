@@ -54,7 +54,7 @@ export default function Propuestas() {
     <div className="mt-10 w-screen flex flex-col items-center h-content mb-20">
       <FiltrosPropuestas propuestas={database} onSendData={handleFilterData} />
       <h3 className="text-4xl w-full pl-10 mt-10"> {coursesDisplay.length} Resultados:</h3>
-      <div className="w-full justify-items-center grid grid-cols-3 gap-5 px-10 h-content mt-10">
+      <div className="w-full justify-items-center grid grid-cols-1 lg:grid-cols-3 gap-5 px-10 h-content mt-10">
         {coursesDisplay ? coursesDisplay?.map((course) => (
           (course ? (
            <div key={course?.title}>

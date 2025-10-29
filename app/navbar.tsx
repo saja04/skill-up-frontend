@@ -28,7 +28,7 @@ export default function NavBar() {
     }, [])
 
     return(
-        <div className="flex w-screen flex-row justify-between align-middle items-center h-25">
+        <div className="hidden md:flex lg:flex w-screen flex-row justify-between align-middle items-center h-25">
             <Link href={'/'} className="hover:underline text-3xl ml-10">Skill <span className="text-green-700">UP</span></Link>
             <input type="text" className="search" placeholder="Buscar propuestas..." />
             <div className="w-auto flex flex-row justify-around gap-10 mr-10">

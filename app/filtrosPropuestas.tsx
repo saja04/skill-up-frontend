@@ -51,7 +51,7 @@ export default function FiltrosPropuestas({ propuestas, onSendData }: {
 
   return (
     <div className="flex flex-col items-center justify-center bg-black py-5 px-20 rounded">
-      <div className="flex flex-row gap-5">
+      <div className="flex flex-wrap lg:flex-row gap-5">
         <button className="filterbutton" onClick={() => (deployMenu == "modality" ? setDeployMenu(false) : handleFiltro("modality"))}>
           Modalidad
         </button>
