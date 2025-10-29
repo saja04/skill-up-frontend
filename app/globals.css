@@ -57,6 +57,10 @@
   .radio-input{
     @apply border border-zinc-700 size-4 rounded-full bg-zinc-400 checked:bg-green-700 appearance-none
   }
+
+  .modality {
+    @apply bg-zinc-900 rounded py-2 px-3
+  }
 }
 
 @layer base {

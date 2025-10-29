@@ -2,6 +2,9 @@ import { Course, User } from "@/types";
 
 export function filterByModality(filter: "modality" | "skills" | "type" | "level" | "profession" | "payment", value: string, propuestas: Array<Course | undefined>): Array<Course | undefined> {
   const result: Array<Course> = [];
+  if(value === ''){
+    return propuestas     
+  }
   propuestas.forEach((propuesta: Course | undefined) => {
     if (propuesta) {
       if (typeof propuesta[filter] === "string" && propuesta[filter].includes(value)) {
