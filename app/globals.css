@@ -2,19 +2,71 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #3d3d3d;
+  --lightgray: #3d3d3d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --bg-lightgray: var(--lightgray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+@layer components {
+  .lnk {
+    @apply h-10 flex items-center justify-center px-5 py-1 rounded bg-black border border-white transition scale-100;
+  }
+  .lnk:hover {
+    background-color: #3d3d3d;
+    @apply border-gray-600 border-2 scale-105 transition shadow;
+  }
+  .lnk:active {
+    @apply border-2 scale-100 border-white transition;
+  }
+
+  .search {
+    background-color: #0c0c0c;
+    @apply w-1/4 px-5 py-2 rounded;
+  }
+  .search:focus {
+    background-color: #3d3d3d;
+    border-color: rgb(165, 165, 165);
+    @apply border-2 shadow;
+  }
+
+  .filterbutton {
+    @apply w-auto px-5 py-1 bg-black border border-white rounded-lg;
+  }
+
+  .userInput {
+    @apply bg-black rounded-lg px-6 py-2 w-full flex items-center;
+  }
+
+  .userInput:focus {
+    background-color: #252525;
+    @apply border border-white;
+  }
+
+  .indicator {
+    @apply ml-1 text-xl;
+  }
+
+  .radio-input{
+    @apply border border-zinc-700 size-4 rounded-full bg-zinc-400 checked:bg-green-700 appearance-none
+  }
+}
+
+@layer base {
+  button:hover {
+    cursor: pointer;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #161616;
     --foreground: #ededed;
   }
 }
@@ -23,4 +75,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+input:focus {
+  outline: none;
+}
+input:active {
+  outline: none;
+}
+
+svg.star-svg {
+  display: inline;
 }
