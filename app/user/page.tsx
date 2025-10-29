@@ -129,7 +129,7 @@ export default function UserCreation() {
       <NavBar />
       {!user ? (
         <div>
-          <div className="ml-10 mt-15 flex flex-col items-center">
+          <div className="mt-15 flex flex-col items-center">
             <h4 className="mx-5 text-4xl">Antes de usar nuestra aplicacion, cuentanos mas sobre tu perfil y que tipo de propuestas estas buscando</h4>
 
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
