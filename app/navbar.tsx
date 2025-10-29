@@ -28,10 +28,10 @@ export default function NavBar() {
     }, [])
 
     return(
-        <div className="hidden md:flex lg:flex w-screen flex-row justify-between align-middle items-center h-25">
-            <Link href={'/'} className="hover:underline text-3xl ml-10">Skill <span className="text-green-700">UP</span></Link>
-            <input type="text" className="search" placeholder="Buscar propuestas..." />
-            <div className="w-auto flex flex-row justify-around gap-10 mr-10">
+        <div className="mt-5 gap-5 flex lg:mt-0 lg:gap-0 md:mt-0 md:gap-0 w-screen flex-col lg:flex-row md:flex-row lg:h-25 md:h-25 lg:justify-between md:justify-between align-middle items-center h-fit">
+            <Link href={'/'} className="hover:underline text-3xl lg:ml-10 md:ml-10">Skill <span className="text-green-700">UP</span></Link>
+            <input type="text" className="search hidden lg:flex md:flex" placeholder="Buscar propuestas..." />
+            <div className="w-fit flex flex-col lg:flex-row md:flex-row justify-around gap-3 lg:mr-10 md:mr-10 lg:gap-10 md:gap-10">
                 <Link href={'/'} className="lnk">Acerca de nosotros</Link>
                 { user ? (
                         <Link href={'/user'} className="lnk flex flex-row items-center gap-2">

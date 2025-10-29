@@ -50,8 +50,9 @@ export default function FiltrosPropuestas({ propuestas, onSendData }: {
   useEffect(() => {}, [deployMenu]);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-black py-5 px-20 rounded">
-      <div className="flex flex-wrap lg:flex-row gap-5">
+    <div className="w-11/12 flex flex-col items-center justify-center bg-black py-5 px-4 lg:px-20 md:px-20 rounded">
+      <p className="text-2xl">Filtros</p>
+      <div className="flex flex-wrap justify-center lg:flex-row gap-5 mt-4">
         <button className="filterbutton" onClick={() => (deployMenu == "modality" ? setDeployMenu(false) : handleFiltro("modality"))}>
           Modalidad
         </button>
