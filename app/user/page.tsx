@@ -130,7 +130,7 @@ export default function UserCreation() {
       {!user ? (
         <div>
           <div className="mt-15 flex flex-col items-center">
-            <h4 className="mx-5 text-4xl">Antes de usar nuestra aplicacion, cuentanos mas sobre tu perfil y que tipo de propuestas estas buscando</h4>
+            <h4 className="mx-5 text-4xl text-center">Antes de usar nuestra aplicacion, cuentanos mas sobre tu perfil y que tipo de propuestas estas buscando</h4>
 
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
               <h5 className="text-3xl mt-3">¿A que area te dedicas o quieres dedicarte?</h5>
