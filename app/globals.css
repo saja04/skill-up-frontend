@@ -2,9 +2,9 @@
 
 :root {
   --background: #161616;
-  --foreground: #3d3d3d;
+  --foreground: #ededed;
   --lightgray: #3d3d3d;
-    color-scheme: dark; 
+  color-scheme: dark; 
 }
 
 @theme inline {
