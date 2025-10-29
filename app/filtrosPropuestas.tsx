@@ -84,7 +84,7 @@ export default function FiltrosPropuestas({ propuestas, onSendData }: { propuest
           </select>
         </div>
         <div className="flex flex-row items-center gap-2">
-          <p className="text-lg">Tipo de propuesta:</p>
+          <p className="text-lg">Tipo:</p>
           <select value={activeFilter.type === "type" ? activeFilter.value : ""} className="modality" onChange={(e) => handleFilterData("type", e.target.value as string)}>
             <option value="" disabled>
               Todo
@@ -97,7 +97,7 @@ export default function FiltrosPropuestas({ propuestas, onSendData }: { propuest
           </select>
         </div>
         <div className="flex flex-row items-center gap-2">
-          <p className="text-lg">Tipo de pago:</p>
+          <p className="text-lg">Pago:</p>
           <select value={activeFilter.type === "payment" ? activeFilter.value : ""} className="modality" onChange={(e) => handleFilterData("payment", e.target.value as string)}>
             <option value="" disabled>
               Todo
