@@ -1,10 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import getAllFilters from "@/utils/getAllFilters";
-import { Filter } from "@/types";
+import { Course, Filter } from "@/types";
 import { filterByModality } from "@/utils/filterPropuestas";
 
-export default function FiltrosPropuestas({ propuestas, onSendData }) {
+export default function FiltrosPropuestas({ propuestas, onSendData }: {
+  propuestas: Array<Course | undefined>,
+  onSendData: (courses: Array<Course | undefined>) => void
+}) {
   const [filters, setFilters] = useState<Filter>();
   const [deployMenu, setDeployMenu] = useState<string | false>();
   const [filterDetails, setFilterDetails] = useState<Array<string | null>>();
@@ -25,7 +28,7 @@ export default function FiltrosPropuestas({ propuestas, onSendData }) {
     onSendData(propuestas);
   }
 
-  function handleFilterData(filter: string, value: string) {
+  function handleFilterData(filter: "modality" | "skills" | "type" | "level" | "profession" | "payment", value: string) {
     console.log(filter, value);
 
     if (propuestas.length > 0) {
