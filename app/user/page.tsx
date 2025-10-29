@@ -107,12 +107,12 @@ export default function UserCreation() {
   useEffect(() => {
     async function main() {
       const rawUser = localStorage.getItem("user") as string;
-      const userr:User = JSON.parse(rawUser);
+      const userr:User = await JSON.parse(rawUser);
 
-      const recommenededShortCourses = getRecommendedCoursesShort(userr?.completed_courses ? userr.completed_courses : []) ;
-
+      const completedCourses = getRecommendedCoursesShort(userr?.completed_courses ? userr.completed_courses : []) ;
+      
       setUser(userr);
-      setUserCourses(recommenededShortCourses)
+      setUserCourses(completedCourses);
     }
     main();
   }, []);
@@ -270,7 +270,7 @@ export default function UserCreation() {
                 <div className="w-full flex flex-col mt-10  px-10 gap-5 py-5">
                   <p className="text-2xl w-1/4">Cursos a los que te anotaste:</p>
                   <div className="flex flex-col gap-5">
-                    {userCourses ? (
+                    {userCourses && userCourses.length > 0 ? (
                       userCourses.map((shortCourse) => (
                         <div key={shortCourse.id}>
                           <a href={`/cursos/${shortCourse.id}`} className="border-green-700 border text-lg hover:cursor-pointer userInput w-fit bg-black hover:border-white hover:text-green-700">{shortCourse.title}</a>

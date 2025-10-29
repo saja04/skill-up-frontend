@@ -2,17 +2,21 @@
 import { User } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
 export default function NavBar() {
 
     const [user, setUser] = useState<User | undefined>()
+    const router = useRouter();
+
 
     function handleDBReset() {
         localStorage.removeItem('db')
-        console.log('db borrada del local storage')
-        window.location.reload()
+        localStorage.removeItem('user')
+        console.log('db y usuario borrada del local storage')
+        router.push('/')
     }
 
     useEffect(() => {
