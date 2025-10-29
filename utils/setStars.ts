@@ -1,4 +1,4 @@
-import { Review } from "@/app/propuestas";
+import { Review } from "@/types";
 
 
 export function getStarsCount(reviews: Array<Review | null>): number {
