@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { getStarsCount } from "@/utils/setStars";
 import toast, { Toaster } from "react-hot-toast";
-import { sleep } from "@/utils/sleep";
 
 export default function Propuesta({ id }: { id: string }) {
   const [propuesta, setPropuesta] = useState<Course>();
   const [addReviewComponent, setAddReviewComponent] = useState<boolean>();
   const [stars, setStars] = useState<number>(0);
+  const [starsPromedio, setStarsPromedio] = useState<number | undefined>();
   const [review, setReview] = useState<string>();
   const [incompleteComponent, setIncompleteComponent] = useState<boolean>(false);
   const [user, setUser] = useState<User | undefined>();
@@ -26,35 +26,32 @@ export default function Propuesta({ id }: { id: string }) {
     setReview(e.target.value);
   }
 
-function handleCourseCompleted() {
-  if (!propuesta) return;
+  function handleCourseCompleted() {
+    if (!propuesta) return;
 
-  if (user?.info) {
-    const currentId = Number(id);
-    const nextCompleted = Array.from(
-      new Set([...(user.completed_courses ?? []), currentId])
-    );
+    if (user?.info) {
+      const currentId = Number(id);
+      const nextCompleted = Array.from(new Set([...(user.completed_courses ?? []), currentId]));
 
-    const nextUser: User = {
-      ...user,
-      completed_courses: nextCompleted,
-    };
+      const nextUser: User = {
+        ...user,
+        completed_courses: nextCompleted,
+      };
 
-    localStorage.setItem("user", JSON.stringify(nextUser));
-    setUser(nextUser);
+      localStorage.setItem("user", JSON.stringify(nextUser));
+      setUser(nextUser);
 
-    toast.success("Curso marcado como completado. Ahora puedes dejar una reseña del mismo.");
-  } else {
-    toast.error("No tienes informacion de usuario. Por favor agrega tu usuario y vuelve a intentarlo");
+      toast.success("Curso marcado como completado. Ahora puedes dejar una reseña del mismo.");
+    } else {
+      toast.error("No tienes informacion de usuario. Por favor agrega tu usuario y vuelve a intentarlo");
+    }
   }
-}
-
 
   function addReview() {
     if (stars && review) {
       const propuestas: Array<Course> = JSON.parse(localStorage.getItem("db") as string);
       const reviewobj: Review = {
-        username: user?.info?.user_name ? user?.info?.user_name : '',
+        username: user?.info?.user_name ? user?.info?.user_name : "",
         stars: stars,
         review: review ? review : "",
       };
@@ -82,13 +79,16 @@ function handleCourseCompleted() {
   useEffect(() => {
     async function main() {
       const raw: string | null = localStorage.getItem("db") as string;
-      const parsed = await JSON.parse(raw);
-      setPropuesta(parsed[id]);
+      const parsed: Array<Course> = await JSON.parse(raw);
+      setPropuesta(parsed[Number(id)]);
 
       const rawUser: string | null = localStorage.getItem("user") as string;
       const parsedUser = await JSON.parse(rawUser);
-      console.log(parsedUser);
 
+      if (parsed[Number(id)].reviews && parsed[Number(id)].reviews.length > 0) {
+        const starsValue: number = getStarsCount(parsed[parseInt(id)].reviews);
+        setStarsPromedio(starsValue);
+      }
       setUser(parsedUser);
     }
     main();
@@ -101,31 +101,51 @@ function handleCourseCompleted() {
     <div className="w-full">
       {propuesta ? (
         <div>
-          <h3 className="ml-5 text-4xl mt-20">{propuesta.title}</h3>
+          <h3 className="text-4xl mt-20 ml-5">
+            {propuesta.title} - {propuesta.profession}
+          </h3>
           <div className="w-screen flex-col justify-center items-center align-middle h-content my-10">
             <div className="flex flex-row w-full ">
-              <div className="w-3/5 bg-black rounded h-100 mx-3 p-5 flex flex-col gap-2">
-                <div>
-                  <h5 className="text-2xl">Descripcion: </h5>
-                  <p className="text-md">{propuesta.description}</p>
+              <div className="w-3/5 bg-black rounded h-fit py-8 mx-3 px-8 flex flex-col gap-10">
+                <div className="flex gap-3 flex-col">
+                  <h5 className="text-3xl">Descripcion: </h5>
+                  <p className="text-lg pr-5">{propuesta.description}</p>
                 </div>
-                <div>
-                  <h5 className="text-2xl">Perfil una vez completado el curso</h5>
+                <div className="flex gap-3 flex-col">
+                  <h5 className="text-3xl ">Perfil profesional una vez completado el {propuesta.type}:</h5>
+                  <p className="text-lg pr-5">{propuesta.professional_profile}</p>
                 </div>
-              </div>
-              <div className="flex flex-col w-2/5 mx-3 mr-5 items-center">
-                {user?.completed_courses && user?.completed_courses.includes(Number(id)) ? (
-                  <></>
+                <div className="flex gap-3 flex-col">
+                  <h5 className="text-3xl ">Habilidades que desarrollaras:</h5>
+                  <div className="w-full flex flex-wrap pr-5 gap-3">
+                    {propuesta.skills.map((skill, index) => (
+                      <p key={index} className="w-fit flex flex-row items-center text-lg border border-white rounded-xl px-3 h-10">
+                        {skill}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-3 flex-col">
+                  <h5 className="text-3xl ">Duracion total y modalidad de cursada:</h5>
+                  <p className="text-lg pr-5">
+                    {propuesta.duration_hours}hs con una carga horaria promedio de {propuesta.week_charge}hs semanales. La modalidad de cursada es {propuesta.modality}.
+                  </p>
+                </div>
+                 {user?.completed_courses && user?.completed_courses.includes(Number(id)) ? (
+                  <div className="w-full flex justify-end">
+                    <button className="cursor-default w-fit filterbutton h-10 bg-zinc-800 text-zinc-400">Ya te anotaste a este {propuesta.type}</button>
+                  </div>
                 ) : (
                   <div className="w-full flex justify-end">
-                    <button onClick={handleCourseCompleted} className="filterbutton mr-10 -mt-20 h-10">
-                      Marcar como en curso o completado
+                    <button onClick={handleCourseCompleted} className="hover:border-green-700 hover:-translate-y-0.5 transition ease-in-out duration-100 w-fit filterbutton h-10">
+                      Anotate ahora!
                     </button>
                   </div>
                 )}
-
+              </div>
+              <div className="flex flex-col w-2/5 mx-3 mr-5 items-center">
                 {addReviewComponent ? (
-                  <div className="w-4/5 mb-6">
+                  <div className="w-full mb-6">
                     <div className="bg-zinc-800 flex flex-col py-6 rounded-lg px-10 w-full gap-5 border-2 border-zinc-400">
                       <div className="w-full flex justify-end">
                         <button onClick={() => setAddReviewComponent(false)} className="text-sm w-5 flex items-center justify-center bg-white text-black rounded-full">
@@ -190,7 +210,14 @@ function handleCourseCompleted() {
 
                 <div className="w-full bg-zinc-900 rounded-lg px-4 py-5 mx-3">
                   <div>
-                    <h5 className="text-xl">Reseñas</h5>
+                    <div className="w-full flex flex-row justify-between pr-2 items-center">
+                      <h5 className="text-3xl">Reseñas</h5>
+                      {propuesta.reviews.length > 0 ? (
+                          <p className="text-2xl">Promedio ★ {starsPromedio}/5</p>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                     {propuesta.reviews.length > 0 ? (
                       <div className="mt-4 flex flex-col gap-4 max-h-80 overflow-scroll">
                         {propuesta.reviews.map((review, index) => (
@@ -208,9 +235,25 @@ function handleCourseCompleted() {
                         ))}
                       </div>
                     ) : (
-                      <div className="mt-4">Todavia no hay reseñas sobre este {propuesta.type}, se el primer usuario en escribir una!</div>
+                      <div className="mt-4 text-lg">Todavia no hay reseñas sobre este {propuesta.type}, se el primer usuario en escribir una!</div>
                     )}
                   </div>
+                </div>
+                <div className="flex flex-col mt-8 w-full bg-zinc-800 rounded-lg px-4 py-5 mx-3 gap-5">
+                  <h6 className="text-3xl mb-2">Informacion de pago</h6>
+                  <p className="text-xl">
+                    Modalidad de pago: <span className="text-xl">{propuesta.payment.type}</span>
+                  </p>
+                  {propuesta.payment.price_per_month ? (
+                    <p className="text-xl">
+                      Cuotas mensuales de: <span className="text-xl">${propuesta.payment.price_per_month} USD cada una</span>
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+                  <p className="text-xl">
+                    Precio total: <span>${propuesta.payment.total_price} USD</span>
+                  </p>
                 </div>
               </div>
             </div>

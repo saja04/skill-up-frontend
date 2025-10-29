@@ -67,7 +67,7 @@ export default function Propuestas() {
                   }
                 >
                   <div className="flex flex-col justify-center w-full items-center gap-3">
-                    {course && course.recommended ? <p className=" bg-green-700 w-fit rounded-b-xl px-4 text-sm">Recomendado para ti!</p> : <></>}
+                    <div className="w-full -mt-2">{course && course.recommended ? <p className=" bg-green-700 w-fit rounded-b-xl px-4 text-sm">Recomendado para ti!</p> : <></>}</div>
                     <div className="w-full -mr-40 -ml-40">
                       <h5 className="text-3xl text-center font-semibold mt-2 w-full">{course?.title}</h5>
                     </div>

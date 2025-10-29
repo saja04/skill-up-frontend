@@ -1,16 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import getAllFilters from "@/utils/getAllFilters";
 import { Course, Filter } from "@/types";
 import { filterByModality } from "@/utils/filterPropuestas";
 
-export default function FiltrosPropuestas({ propuestas, onSendData }: {
+export default function FiltrosPropuestas({ propuestas, onSendData}: {
   propuestas: Array<Course | undefined>,
   onSendData: (courses: Array<Course | undefined>) => void
 }) {
   const [filters, setFilters] = useState<Filter>();
   const [deployMenu, setDeployMenu] = useState<string | false>();
   const [filterDetails, setFilterDetails] = useState<Array<string | null>>();
+  const [filtersParams, setFiltersParams] = useState()
 
   function handleFiltro(filtro: "modality" | "skills" | "type" | "level" | "profession" | "payment") {
     if (filtro === "payment") {
@@ -42,6 +44,7 @@ export default function FiltrosPropuestas({ propuestas, onSendData }: {
   useEffect(() => {
     async function main() {
       const filterss: Filter = getAllFilters();
+      const params = useSearchParams();
       setFilters(filterss);
     }
     main();
