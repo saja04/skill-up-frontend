@@ -133,7 +133,7 @@ export default function UserCreation() {
             <h4 className="mx-5 text-4xl text-center">Antes de usar nuestra aplicacion, cuentanos mas sobre tu perfil y que tipo de propuestas estas buscando</h4>
 
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
-              <h5 className="text-3xl mt-3">¿A que area te dedicas o quieres dedicarte?</h5>
+              <h5 className="text-3xl mt-3 text-center sm:px-3">¿A que area te dedicas o quieres dedicarte?</h5>
               <div className="w-10/12 flex flex-wrap gap-10 my-10 justify-center">
                 {professions.map((profession, index) => (
                   <label
@@ -164,7 +164,7 @@ export default function UserCreation() {
               </div>
             </div>
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
-              <h5 className="text-3xl mt-3">
+              <h5 className="text-3xl mt-3 text-center">
                 Dentro del area{" "}
                 {!anotherProfession && professionInput != "another" ? (
                   <span className="uppercase text-green-700">{professionInput.trim()}</span>
@@ -187,7 +187,7 @@ export default function UserCreation() {
               </div>
             </div>
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
-              <h5 className="text-3xl mt-3">¿Que tipo de educacion estas buscando?</h5>
+              <h5 className="text-3xl mt-3 text-center">¿Que tipo de educacion estas buscando?</h5>
               <div className="w-10/12 flex flex-wrap gap-10 my-10 justify-center">
                 {types.map((type, index) => (
                   <label
