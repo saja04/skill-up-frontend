@@ -105,8 +105,8 @@ export default function Propuesta({ id }: { id: string }) {
             {propuesta.title} - {propuesta.profession}
           </h3>
           <div className="w-screen flex-col justify-center items-center align-middle h-content my-10">
-            <div className="flex flex-row w-full ">
-              <div className="w-3/5 bg-black rounded h-fit py-8 mx-3 px-8 flex flex-col gap-10">
+            <div className="flex flex-col w-full items-center px-5 lg:flex-row md:flex-row lg:items-start md:items-start lg:px-0 md:lg:px-0">
+              <div className="w-full bg-black rounded h-fit py-8 mx-3 px-8 flex flex-col gap-10 lg:w-3/5 md:w-3/5">
                 <div className="flex gap-3 flex-col">
                   <h5 className="text-3xl">Descripcion: </h5>
                   <p className="text-lg pr-5">{propuesta.description}</p>
@@ -131,9 +131,9 @@ export default function Propuesta({ id }: { id: string }) {
                     {propuesta.duration_hours}hs con una carga horaria promedio de {propuesta.week_charge}hs semanales. La modalidad de cursada es {propuesta.modality}.
                   </p>
                 </div>
-                 {user?.completed_courses && user?.completed_courses.includes(Number(id)) ? (
+                {user?.completed_courses && user?.completed_courses.includes(Number(id)) ? (
                   <div className="w-full flex justify-end">
-                    <button className="cursor-default w-fit filterbutton h-10 bg-zinc-800 text-zinc-400">Ya te anotaste a este {propuesta.type}</button>
+                    <button className="cursor-default w-fit h-fit filterbutton bg-zinc-800 text-zinc-400">Ya te anotaste a este {propuesta.type}</button>
                   </div>
                 ) : (
                   <div className="w-full flex justify-end">
@@ -143,7 +143,7 @@ export default function Propuesta({ id }: { id: string }) {
                   </div>
                 )}
               </div>
-              <div className="flex flex-col w-2/5 mx-3 mr-5 items-center">
+              <div className="flex flex-col w-full mx-3 items-center rounded h-fit px-0 gap-5 my-5 lg:my-0 md:my-0 lg:px-9 md:px-9 lg:w-2/5 md:w-2/5">
                 {addReviewComponent ? (
                   <div className="w-full mb-6">
                     <div className="bg-zinc-800 flex flex-col py-6 rounded-lg px-10 w-full gap-5 border-2 border-zinc-400">
@@ -200,7 +200,7 @@ export default function Propuesta({ id }: { id: string }) {
                   </div>
                 ) : user?.completed_courses && user?.completed_courses.includes(Number(id)) ? (
                   <div className="w-full flex justify-end">
-                    <button onClick={() => setAddReviewComponent(true)} className="filterbutton mr-10 -mt-20 h-10">
+                    <button onClick={() => setAddReviewComponent(true)} className="filterbutton mr-0 mt-0 h-10 lg:-mt-20 md:-mt-20 lg:mr-10 md:mr-10">
                       Agregar reseña
                     </button>
                   </div>
@@ -208,18 +208,14 @@ export default function Propuesta({ id }: { id: string }) {
                   <></>
                 )}
 
-                <div className="w-full bg-zinc-900 rounded-lg px-4 py-5 mx-3">
+                <div className="w-full bg-zinc-900 rounded-lg px-4 py-5">
                   <div>
-                    <div className="w-full flex flex-row justify-between pr-2 items-center">
+                    <div className="w-full flex flex-col justify-between pr-0 items-center lg:flex-row md:flex-row lg:pr-2 md:pr-2">
                       <h5 className="text-3xl">Reseñas</h5>
-                      {propuesta.reviews.length > 0 ? (
-                          <p className="text-2xl">Promedio ★ {starsPromedio}/5</p>
-                      ) : (
-                        <></>
-                      )}
+                      {propuesta.reviews.length > 0 ? <p className="w-fit text-2xl">Promedio ★ {starsPromedio}/5</p> : <></>}
                     </div>
                     {propuesta.reviews.length > 0 ? (
-                      <div className="mt-4 flex flex-col gap-4 max-h-80 overflow-scroll">
+                      <div className="mt-4 flex flex-col gap-4 max-h-100 overflow-scroll lg:max-h-80 md:max-h-80">
                         {propuesta.reviews.map((review, index) => (
                           <div key={index} className=" bg-zinc-800 rounded-xl py-4 px-10">
                             <div className="flex flex-row justify-between mb-2">

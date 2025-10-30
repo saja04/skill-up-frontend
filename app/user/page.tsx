@@ -133,38 +133,38 @@ export default function UserCreation() {
             <h4 className="mx-5 text-4xl text-center">Antes de usar nuestra aplicacion, cuentanos mas sobre tu perfil y que tipo de propuestas estas buscando</h4>
 
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
-              <h5 className="text-3xl mt-3 text-center sm:px-3">¿A que area te dedicas o quieres dedicarte?</h5>
+              <h5 className="userOptionTitle">¿A que area te dedicas o quieres dedicarte?</h5>
               <div className="w-10/12 flex flex-wrap gap-10 my-10 justify-center">
                 {professions.map((profession, index) => (
                   <label
-                    className="border border-white bg-black py-4 rounded-lg px-10 flex items-center space-x-4 transition-transform duration-150 ease-in-out hover:-translate-y-1 active:translate-y-1"
+                    className="userOption"
                     key={index}
                   >
                     <input name="profession" checked={professionInput === profession} onChange={(e) => handleProfessionInput(e.target.value)} value={profession} type="radio" className="radio-input" />
                     {profession === "iot" ? (
-                      <span className="first-letter:uppercase text-lg">{profession} (Internet of things)</span>
+                      <span className="userOptionText">{profession} (Internet of things)</span>
                     ) : (
-                      <span className="first-letter:uppercase text-lg">{profession}</span>
+                      <span className="userOptionText">{profession}</span>
                     )}
                   </label>
                 ))}
-                <label className="border border-white bg-black py-4 rounded-lg px-10 flex items-center space-x-4 transition-transform duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0">
+                <label className="userOption">
                   <input name="profession" checked={professionInput === "another"} onChange={(e) => handleProfessionInput(e.target.value)} value={"another"} type="radio" className="radio-input" />
-                  <span className="first-letter:uppercase">Otra</span>
+                  <span className="userOptionText">Otra</span>
                   {professionInput === "another" ? (
-                    <input type="text" className="userInput w-60 py-1 px-4" placeholder="Desarrollo de videojuegos" value={anotherProfession} onChange={(e) => setAnotherProfession(e.target.value)} />
+                    <input type="text" className="userInput w-3/4 py-1 px-1 lg:px-4 md:py-1" placeholder="Desarrollo de videojuegos" value={anotherProfession} onChange={(e) => setAnotherProfession(e.target.value)} />
                   ) : (
                     <></>
                   )}
                 </label>
-                <label className="border border-white bg-black py-4 rounded-lg px-10 flex items-center space-x-4 transition-transform duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0">
+                <label className="userOption">
                   <input name="profession" checked={professionInput === "none"} onChange={(e) => handleProfessionInput(e.target.value)} value={"none"} type="radio" className="radio-input" />
-                  <span className="first-letter:uppercase">No estoy segur@</span>
+                  <span className="userOptionText">No estoy segur@</span>
                 </label>
               </div>
             </div>
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
-              <h5 className="text-3xl mt-3 text-center">
+              <h5 className="userOptionTitle">
                 Dentro del area{" "}
                 {!anotherProfession && professionInput != "another" ? (
                   <span className="uppercase text-green-700">{professionInput.trim()}</span>
@@ -177,53 +177,53 @@ export default function UserCreation() {
               <div className="w-10/12 flex flex-wrap gap-10 my-10 justify-center">
                 {levels.map((level, index) => (
                   <label
-                    className="border border-white bg-black py-4 rounded-lg px-10 flex items-center space-x-4 transition-transform duration-150 ease-in-out hover:-translate-y-1 active:translate-y-1"
+                    className="userOption"
                     key={index}
                   >
                     <input name="level" checked={levelInput === level} onChange={(e) => handleLevelInput(e.target.value)} value={level} type="radio" className="radio-input" />
-                    <span className="first-letter:uppercase text-lg">{level}</span>
+                    <span className="userOptionText">{level}</span>
                   </label>
                 ))}
               </div>
             </div>
             <div className="mt-20 flex flex-col items-center bg-zinc-800 py-5 w-10/12 rounded-xl">
-              <h5 className="text-3xl mt-3 text-center">¿Que tipo de educacion estas buscando?</h5>
+              <h5 className="userOptionTitle">¿Que tipo de educacion estas buscando?</h5>
               <div className="w-10/12 flex flex-wrap gap-10 my-10 justify-center">
                 {types.map((type, index) => (
                   <label
-                    className="border border-white bg-black py-4 rounded-lg px-10 flex items-center space-x-4 transition-transform duration-150 ease-in-out hover:-translate-y-1 active:translate-y-1"
+                    className="userOption"
                     key={index}
                   >
                     <input name="type" checked={typeInput === type} onChange={(e) => handleTypeInput(e.target.value)} value={type} type="radio" className="radio-input" />
-                    <span className="first-letter:uppercase text-lg">{type}</span>
+                    <span className="userOptionText">{type}</span>
                   </label>
                 ))}
               </div>
             </div>
-            <h5 className=" text-4xl mt-15">Crea tu usuario (opcional)</h5>
+            <h5 className="text-4xl mt-15 text-center">Crea tu usuario (opcional)</h5>
 
-            <div className="bg-zinc-800 w-4/5 rounded-xl py-10 px-20 my-10 flex flex-row justify-around gap-10 ">
-              <div className="flex flex-col gap-10 w-1/4">
-                <div className="flex flex-col gap-2">
+            <div className="userInfoContainer">
+              <div className="userDataContainer">
+                <div className="userInputContainer">
                   <p className="indicator">Nombre</p>
                   <input type="text" placeholder="Elon" onChange={(e) => handleUserInfo("first_name", e.target.value)} className="userInput" />
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="userInputContainer">
                   <p className="indicator">Apellido</p>
                   <input type="text" placeholder="Musk" onChange={(e) => handleUserInfo("last_name", e.target.value)} className="userInput" />
                 </div>
               </div>
-              <div className="flex flex-col gap-10 w-1/4 justify-around">
-                <div className="flex flex-col gap-2">
+              <div className="userDataContainer">
+                <div className="userInputContainer">
                   <p className="indicator">Correo Electronico</p>
                   <input type="text" placeholder="ejemplo@mail.com" onChange={(e) => handleUserInfo("email", e.target.value)} className="userInput w-full" />
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="userInputContainer">
                   <p className="indicator">Nombre de usuario (visible)</p>
                   <input type="text" placeholder="Owlkapwn" className="userInput" onChange={(e) => handleUserInfo("user_name", e.target.value)} />
                 </div>
               </div>
-              <div className="flex flex-col gap-3 w-1/4">
+              <div className="userInputContainer">
                 <p className="indicator">Fecha de nacimiento</p>
                 <input type="text" placeholder="DD-MM-YYYY" className="userInput w-full" onChange={(e) => handleUserInfo("born_date", e.target.value)} />
               </div>

@@ -45,6 +45,22 @@
     @apply bg-black rounded-lg px-6 py-2 w-full flex items-center;
   }
 
+  .userInfoInput {
+     @apply bg-black rounded-lg px-6 py-2 items-center flex-col gap-10 w-full lg:w-1/4 md:w-1/4 ;
+  }
+
+  .userInfoContainer {
+    @apply bg-zinc-800 w-4/5 rounded-xl py-10 px-2 my-10 flex flex-col justify-around gap-10 lg:px-20 md:px-20 lg:flex-row md:flex-row;
+  }
+
+  .userDataContainer {
+    @apply flex flex-col gap-10 w-full lg:w-1/4 md:w-1/4;
+  }
+
+  .userInputContainer{
+    @apply flex flex-col gap-2;
+  }
+
   .userInput:focus {
     background-color: #252525;
     @apply border border-white;
@@ -60,6 +76,17 @@
 
   .modality {
     @apply bg-zinc-900 rounded py-2 px-3
+  }
+
+  .userOptionTitle{
+    @apply text-2xl mt-3 text-center lg:text-3xl md:text-3xl;
+  }
+
+  .userOption {
+    @apply border border-white bg-black py-2 lg:py-4 px-3 lg:px-10 rounded-lg flex items-center space-x-4 transition-transform duration-150 ease-in-out hover:-translate-y-1 active:translate-y-1;
+  }
+  .userOptionText{
+    @apply first-letter:uppercase text-base lg:text-lg md:text-lg;
   }
 }
 

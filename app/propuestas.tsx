@@ -54,7 +54,7 @@ export default function Propuestas() {
     <div className="mt-10 w-screen flex flex-col items-center h-content mb-20">
       <FiltrosPropuestas propuestas={database} onSendData={handleFilterData} />
       <h3 className="text-4xl w-full pl-10 mt-10"> {coursesDisplay.length} Resultados:</h3>
-      <div className="w-full justify-items-center grid grid-cols-1 lg:grid-cols-3 gap-5 px-10 h-content mt-10">
+      <div className="w-full justify-items-center grid grid-cols-1 lg:grid-cols-3 gap-5 px-5 h-content mt-10 lg:px-10 md:px-10">
         {coursesDisplay ? (
           coursesDisplay?.map((course) =>
             course ? (
@@ -83,12 +83,12 @@ export default function Propuestas() {
                     </div>
                   </div>
                   <p className="px-text-justify mt-4 max-h-2/6 overflow-y-scroll">Descripcion: {course?.description}</p>
-                  <div className="w-full gap-2 lg:w-11/12 mt-3 flex flex-col bg-zinc-900 py-2 rounded-xl justify-center  align-middle items-center">
-                    <div className="w-full flex flex-col md:flex-col items-center gap-2 justify-center">
-                      <p>Duracion total: {course?.duration_hours} hs</p>
-                      <p>Modalidad: {course?.modality.charAt(0).toUpperCase() + course.modality.slice(1)}</p>
+                  <div className="w-full gap-2 lg:w-11/12 mt-3 flex flex-col bg-zinc-900 py-2 rounded-xl justify-center align-middle items-center">
+                    <div className="w-full flex flex-col items-center gap-2 justify-center">
+                      <p className="text-center">Duracion total: {course?.duration_hours} hs</p>
+                      <p className="text-center">Modalidad: {course?.modality.charAt(0).toUpperCase() + course.modality.slice(1)}</p>
                     </div>
-                    {course?.payment.type == "mensual" ? <p>Pagos mensuales de ${course.payment.price_per_month} USD</p> : <p>Pago unico de ${course?.payment.total_price} USD</p>}
+                    {course?.payment.type == "mensual" ? <p className="text-center">Pagos mensuales de ${course.payment.price_per_month} USD</p> : <p>Pago unico de ${course?.payment.total_price} USD</p>}
                   </div>
                   <div className="w-full flex justify-end my-2">
                     {course.reviews.length > 0 ? (
